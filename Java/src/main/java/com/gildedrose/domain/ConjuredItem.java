@@ -14,9 +14,4 @@ public class ConjuredItem extends InventoryItem {
     public int qualityDecreaseAmount() {
         return 2;
     }
-
-    @Override
-    public int handleQualityAfterSellIn() {
-        return decreaseQualityAboveZero();
-    }
 }

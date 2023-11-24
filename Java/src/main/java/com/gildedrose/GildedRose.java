@@ -25,11 +25,11 @@ class GildedRose {
             item.sellIn = inventoryItem.reduceSellIn();
 
             // increase or decrease quality based on the items
-            item.quality = inventoryItem.handleQuality();
+            item.quality = inventoryItem.updateQuality();
 
             if (item.sellIn < 0) {
                 // increase or decrease quality more after sell in
-                item.quality = inventoryItem.handleQualityAfterSellIn();
+                item.quality = inventoryItem.updateQualityAfterSellIn();
             }
         });
     }
@@ -45,7 +45,7 @@ class GildedRose {
             case BACKSTAGE_PASS:
                 return new BackstagePass(item);
             default:
-                return new DefaultItem(item);
+                return new InventoryItem(item);
         }
     }
 }

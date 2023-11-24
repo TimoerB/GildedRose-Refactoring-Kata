@@ -11,12 +11,7 @@ public class Legendary extends InventoryItem {
     }
 
     @Override
-    public int qualityDecreaseAmount() {
-        return 0;
-    }
-
-    @Override
-    public int handleQualityAfterSellIn() {
+    public int updateQualityAfterSellIn() {
         return quality;
     }
 
