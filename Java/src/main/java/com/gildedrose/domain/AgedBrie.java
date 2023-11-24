@@ -11,17 +11,12 @@ public class AgedBrie extends InventoryItem {
     }
 
     @Override
-    public int handleQuality() {
+    public int updateQuality() {
         return increaseQualityBelowMaximum();
     }
 
     @Override
-    public int qualityDecreaseAmount() {
-        return 1;
-    }
-
-    @Override
-    public int handleQualityAfterSellIn() {
+    public int updateQualityAfterSellIn() {
         return increaseQualityBelowMaximum();
     }
 }

@@ -11,40 +11,26 @@ public class BackstagePass extends InventoryItem {
     }
 
     @Override
-    public int handleQuality() {
-        return increaseQualityBelowMaximum();
-    }
-
-    @Override
-    public int qualityDecreaseAmount() {
-        return 1;
-    }
-
-    @Override
-    public int handleQualityAfterSellIn() {
-        return 0;
-    }
-
-    @Override
-    public int increaseQualityBelowMaximum() {
-        increaseQualityIfNotMaximum();
+    public int updateQuality() {
+        increaseQualityBelowMaximum();
 
         // increase backstage pass further when sellIn date approaches
         return increaseBackstagePass();
     }
 
+    @Override
+    public int updateQualityAfterSellIn() {
+        return 0;
+    }
+
     private int increaseBackstagePass() {
         if (sellIn < 10) {
-            increaseQualityIfNotMaximum();
+            increaseQualityBelowMaximum();
 
             if (sellIn < 5) {
-                increaseQualityIfNotMaximum();
+                increaseQualityBelowMaximum();
             }
         }
         return quality;
-    }
-
-    private void increaseQualityIfNotMaximum() {
-        quality = super.increaseQualityBelowMaximum();
     }
 }

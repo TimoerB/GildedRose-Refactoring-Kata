@@ -1,5 +1,6 @@
 package com.gildedrose.domain;
 
+import com.gildedrose.Item;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -7,22 +8,28 @@ import static java.util.stream.IntStream.range;
 
 @NoArgsConstructor
 @Setter
-public abstract class InventoryItem {
+public class InventoryItem {
     private static final int MAX_QUALITY = 50;
 
     public String name;
     public int quality;
     public int sellIn;
 
-    public abstract int qualityDecreaseAmount();
+    public InventoryItem(Item item) {
+        setName(item.name);
+        setSellIn(item.sellIn);
+        setQuality(item.quality);
+    }
 
-    public abstract int handleQualityAfterSellIn();
+    public int qualityDecreaseAmount() {
+        return 1;
+    }
 
     public int decreaseQualityAboveZero() {
         return quality > 0 ? quality - 1 : 0;
     }
 
-    public int increaseQualityBelowMaximum() {
+    int increaseQualityBelowMaximum() {
         if (quality < MAX_QUALITY) {
             quality++;
         }
@@ -33,8 +40,12 @@ public abstract class InventoryItem {
         return --sellIn;
     }
 
-    public int handleQuality() {
+    public int updateQuality() {
         range(0, qualityDecreaseAmount()).forEach(i -> quality = decreaseQualityAboveZero());
         return quality;
+    }
+
+    public int updateQualityAfterSellIn() {
+        return decreaseQualityAboveZero();
     }
 }
