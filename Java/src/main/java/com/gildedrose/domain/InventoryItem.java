@@ -4,8 +4,6 @@ import com.gildedrose.Item;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import static java.util.stream.IntStream.range;
-
 @NoArgsConstructor
 @Setter
 public class InventoryItem {
@@ -21,19 +19,12 @@ public class InventoryItem {
         setQuality(item.quality);
     }
 
-    public int qualityDecreaseAmount() {
-        return 1;
-    }
-
     public int decreaseQualityAboveZero() {
-        return quality > 0 ? quality - 1 : 0;
+        return quality > 0 ? --quality : 0;
     }
 
     int increaseQualityBelowMaximum() {
-        if (quality < MAX_QUALITY) {
-            quality++;
-        }
-        return quality;
+        return quality < MAX_QUALITY ? ++quality : quality;
     }
 
     public int reduceSellIn() {
@@ -41,8 +32,7 @@ public class InventoryItem {
     }
 
     public int updateQuality() {
-        range(0, qualityDecreaseAmount()).forEach(i -> quality = decreaseQualityAboveZero());
-        return quality;
+        return decreaseQualityAboveZero();
     }
 
     public int updateQualityAfterSellIn() {
