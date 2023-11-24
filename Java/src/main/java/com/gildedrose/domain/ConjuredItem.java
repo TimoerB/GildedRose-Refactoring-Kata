@@ -2,6 +2,8 @@ package com.gildedrose.domain;
 
 import com.gildedrose.Item;
 
+import static java.util.stream.IntStream.range;
+
 public class ConjuredItem extends InventoryItem {
 
     public ConjuredItem(Item item) {
@@ -11,7 +13,8 @@ public class ConjuredItem extends InventoryItem {
     }
 
     @Override
-    public int qualityDecreaseAmount() {
-        return 2;
+    public int updateQuality() {
+        range(0, 2).forEach(i -> decreaseQualityAboveZero());
+        return quality;
     }
 }
